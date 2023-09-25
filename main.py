@@ -1,5 +1,5 @@
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi import FastAPI, Form, BackgroundTasks
+from fastapi import FastAPI, Form, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 from typing import Annotated
 import uvicorn
@@ -30,8 +30,7 @@ async def submit_form(name: Annotated[str, Form()],
         send_mail(name, email, message)
         return {'message': 'Email sent successfully'}
     except Exception as e:
-        print(e)
-        return {'message': 'Email failed'}
+        raise HTTPException(status_code=400, detail=str(e))
 
 if __name__ == '__main__':
     uvicorn.run('main:app', reload=True)
