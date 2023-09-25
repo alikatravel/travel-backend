@@ -1,7 +1,8 @@
 import smtplib
 from dotenv import load_dotenv
 from email.message import EmailMessage
-import ssl, os
+import ssl
+import os
 
 load_dotenv()
 
@@ -12,6 +13,7 @@ EMAIL_PORT = int(os.getenv('EMAIL_PORT', 0))
 EMAIL_RECEIVER = 'support@alika.uz'
 print(EMAIL_HOST, EMAIL_HOST_USER, EMAIL_HOST_PASSWORD, EMAIL_PORT, EMAIL_RECEIVER)
 context = ssl.create_default_context()
+
 
 def send_mail(name, email, body):
     em = EmailMessage()
